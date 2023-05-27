@@ -180,6 +180,7 @@ Which Album types are more prominent on Spotify?
 ## Task 7 : Write an SQL query to solve the given problem statement.
 Spotify's most loved song tracks are to be declared soon. Help Spotify choose the top 5 most streamed+youtube viewed song track.
 
+## All the queries to solve the above mentioned problem statements :
 
 ```python
 ##code
