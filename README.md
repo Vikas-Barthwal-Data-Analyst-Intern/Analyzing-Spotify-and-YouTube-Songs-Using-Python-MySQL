@@ -156,86 +156,44 @@ def export_the_cleaned_dataset():
 # Module 2: Data Analysis using SQL
 
 - In this module, we worked on performing data analysis on the pre-processed data from the previous module and conducting Data Analysis using SQL.
-- We generated queries for given problem statements. We performed queries using SQLITE connection inside python program. 
+- We generated queries for given problem statements. We performed queries after making connection to phpmyadmin database server. 
 
  
-### Here, First we will load our cleaned csv dataset named "Cleaned_employees_final_dataset.csv" into a new dataframe.
-```python
-data1 = pd.read_csv("Cleaned_employees_final_dataset.csv")
+## Task 1 : Write an SQL query to solve the given problem statement.
+- Which is the most viewed song track on youtube?
 
-# We will Create a SQLite in-memory database and establish a connection
-conn = sqlite3.connect(':memory:')
+## Task 2 : Write an SQL query to solve the given problem statement.
+- Which Song track is streamed most on Spotify?
 
-# Store the DataFrame in a SQL table
-data1.to_sql('employee', conn, index=False)
-```
-***
+## Task 3 : Write an SQL query to solve the given problem statement.
+- EnergyLiveness ratio is one of the popular ways to measure the quality of a song, which are the top 5 songs that have the highest energyliveness ratio.
 
-## Task 1 :Find the average age of employees in each department and gender group. ( Round average age up to two decimal places if needed).
-```python
-##code
-# Solution:
-  query = "select department,gender,round(avg(age),2) as average_age from employee group by department,gender"
-  result = pd.read_sql_query(query, conn)
+## Task 4 : Write an SQL query to solve the given problem statement.
+- Let us assume a situation where an artist named Black Eyed Peas wants to analyze his songs. The artist wants to know which platform is capable of keeping his song track more engaged. To check this he assigns you this task and wants you to report to him where his song tracks are more played on. compare the platforms.
 
-# Displaying the query result :
-  print(result1)
-```
+## Task 5 : Write an SQL query to solve the given problem statement.
+Gorillaz wants to know their most liked song on youtube. Report to them with their most liked song along with the Energy and Tempo of the song.
+
+## Task 6 : Write an SQL query to solve the given problem statement.
+Which Album types are more prominent on Spotify?
+
+## Task 7 : Write an SQL query to solve the given problem statement.
+Spotify's most loved song tracks are to be declared soon. Help Spotify choose the top 5 most streamed+youtube viewed song track.
 
 
-               department gender  average_age
-    0           Analytics      f    29.88
-    1           Analytics      m    33.54
-    2             Finance      f    33.33
-    3             Finance      m    33.15
-    4                  HR      f    35.57
-    5                  HR      m    34.98
-    6               Legal      f    33.72
-    7               Legal      m    34.69
-    8          Operations      f    36.37
-    9          Operations      m    36.88
-    10        Procurement      f    36.86
-    11        Procurement      m    36.73
-    12                R&D      f    31.69
-    13                R&D      m    33.40
-    14  Sales & Marketing      f    34.90
-    15  Sales & Marketing      m    35.90
-    16         Technology      f    35.76
-    17         Technology      m    35.87
-
-
-***
-
-## Task 2 :List the top 3 departments with the highest average training scores(Round average age up to two decimal places if needed).
 ```python
 ##code
-# Solution :
-  query = "select department,round(avg(avg_training_score),2)as avg_training_score from employee group by department order by avg_training_score desc limit 3"
-  result = pd.read_sql_query(query, conn)
-
-# Displaying the query result :
-  print(result)
-```
-
-       department  avg_training_score
-    0   Analytics               84.59
-    1         R&D               84.42
-    2  Technology               79.81
-
-
-***
-
-## Task 3 :Find the percentage of employees who have won awards in each region.(Round average age up to two decimal places if needed).
+# Solution: Task 1 : SELECT track,Views from cleaned_dataset order by Views desc limit 1;
+***  
 ```python
 ##code
-# Solution :
-  query = "WITH CTE(REGION,TOTAL) AS (SELECT REGION,COUNT(*) FROM employee WHERE AWARDS_WON=1 GROUP BY REGION) SELECT REGION,ROUND(TOTAL*100/(SELECT COUNT(*) FROM employee WHERE AWARDS_WON=1),2) AS AWARDS_PERCENTAGE FROM CTE"
-
-  result = pd.read_sql_query(query, conn)
-
-# Displaying the query result :
-  print(result)
-```
+# Solution : Task 2 : select track,Stream from cleaned_dataset where most_playedon="spotify" order by Stream desc limit 1;
+***  
+```python
+##code
+# Solution : Task 3 : EnergyLiveness ratio is one of the popular ways to measure the quality of the song, which are the top 5 songs that have the highest energyliveness ratio.
+***
+  ```
 
            region  AWARDS_PERCENTAGE
     0   region_10              2.71
