@@ -45,22 +45,21 @@ Data Pre-processing is one of the important steps in data analytics because data
 - Task 3 : Null Value Handling (Manage null values in data for improved data quality and analysis and return dataframe).
 - Task 4 : Duplicate Check And First Value Retention : Data deduplication for accuracy(Identify and eliminate duplicate records in the dataset while retaining the first occurrence of each unique value. This ensures data integrity by removing redundant information and maintaining the original data structure).
 - Task 5 : Millisecond to Minute Conversion : Enhancing Time Duration Clarity(Convert the duration in milliseconds to minutes, facilitating a clearer comprehension and representation of time intervals in a more user-friendly format).
+- Task 6 : Column Renaming : Enhancing clarity with duration in minutes(Change the name of the modified column to "Duration_min" to accurately reflect the conversion from milliseconds to minutes, providing a more descriptive and meaningful representation of the data).
+- Task 7 : Exclusion of irrelevant tracks : Filtering out '?' prefix track names(Eliminate track names that are deemed irrelevant and begin with the "?" character, ensuring the dataset only includes relevant and meaningful track information for further analysis or processing).
+- Task 8 : Energy to Liveness Ration Calculation : Analysing the relationship and storing results(Compute the Energy to Liveness ratio for each track, quantifying the relationship between energy and liveliness attributes. The resulting ratios are then stored in a column named 'EnergyLiveness' for further analysis or interpretation).
+- Task 9 : Data Type Conversion : Transforming 'Views' to float for enhanced usability(Modify the data type of the 'views' column to float, enabling numerical operations and facilitating its utilization in subsequent analysis or calculations requiring floating-point values.
+- Task 10 : Platform Dominance Analysis : Identifying most played platform and creating 'Most_Playedon' column(Analyze the 'views' and 'stream' columns to determine the dominant platform (YouTube or Spotify) on which a song track was most played. Create a new column called 'most_playedon' with values 'Spotify' or 'YouTube' indicating the platform with the highest play count for each song track).
+- Task 11 : Data Export and Download : Saving and accessing 'Cleaned_dataset.csv'(Export the data to a CSV file named "cleaned_dataset.csv" and enable downloading by providing a clickable file name, allowing users to access and retrieve the file with ease).
+- Task 12 : Module 1 completion : Creating MySQL Table from exported 'Cleaned_dataset.csv'(Create a MySQL table named "cleaned_dataset" by utilizing the exported file, "cleaned_dataset.csv". Follow these steps:  1. Download the CSV file.  2. Create the table using the CSV file, either through an online editor or by executing SQL commands.  3. Click "Run Test" to conclude Module 1).
 
-
-
-- Step 1: Removing duplicate rows.
-- Step 2: Removing rows for which numeric columns are having irrelevant data type values
-- Step 3: Remove irrelevant values from each column if any. Validation all values for a column, Check for any inconsistencies or discrepancies in data  types, units, or formats.Feel free to add more validation checks which you might feel necessary for the dataset’s integrity
-- Step 4: Export the cleaned dataset as a .csv file: prefer UTF-8 encoding.
-- Step 5: Convert the pre-processed dataset into an SQL file. 
-- Step 6: Manually generate a table by utilizing the database information provided in the "Database Info" tab.
-
+# All python codes for Data-Preprocessing and converting to new csv file.
 
 
 ```python
 
 import pandas as pd
-import sqlite3
+import numpy as np
 import warnings
 warnings.filterwarnings("ignore")
 
