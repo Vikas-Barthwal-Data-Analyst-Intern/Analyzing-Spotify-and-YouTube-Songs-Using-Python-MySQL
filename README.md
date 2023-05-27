@@ -64,29 +64,91 @@ import warnings
 warnings.filterwarnings("ignore")
 
 
-# First step is to get dataframe by calling read_csv function of pandas
-data=pd.read_csv('Uncleaned_employees_final_dataset.csv')
 
-# Now we should check null values in our dataframe
-data.isnull().sum()
-
-# As we have null values in 2 columns , So we will remove those records from our dataframe
-data.dropna(inplace=True)
-
-# Now we should remove duplicate records from our dataframe
-data.drop_duplicates(keep="first",inplace=True)
+#Task 1: Remove columns that are not needed in our analysis.
+# Remove Url_spotify, Uri, Key, Url_youtube, Description
+def Remove_columns():
+    df = pd.read_csv('Spotify_Youtuben.csv')
+    df.drop(columns=['Url_spotify','Uri','Key','Url_youtube','Description'],axis=1,inplace=True)
+    return df
 
 
-# Now we will check if each column has relevant data type or not
-data.dtypes
-
-# Here we can see that one column called previous_year_rating is in floating data type , while it should be integer.
-# So we will convert this floating data type into integer64.
-data["previous_year_rating"]=data["previous_year_rating"].astype("int64")
+#Task 2: Check for the null values
+def no_of_null_values():
+    df=Remove_columns()
+    df=df.isna().sum()
+    return df
     
 
-# Now we will save this cleaned dataframe as "Cleaned_employees_final_dataset.csv" in a csv file format.
-data.to_csv("Cleaned_employees_final_dataset.csv",index=False) 
+#Task 3: Handle the null values replace int value with 0 and other values with NA
+def Handle_Null_values():
+    df=Remove_columns()
+    for i in df.columns:
+        if df[i].dtypes=="float64":
+            df[i].fillna(0,inplace=True)
+        if df[i].dtypes=="object":
+            df[i].fillna("NA",inplace=True)
+    return df
+
+#Task 4: CHECK FOR DUPLICATES AND REMOVE THEM KEEPING THE FIRST VALUE
+def drop_the_duplicates():
+    df=Handle_Null_values()
+    df.drop_duplicates(keep="first",inplace=True)
+    return df
+
+#Task 5: CONVERT millisecond duration to minute for a better understanding
+def convert_milisecond_to_Minute():
+    df=drop_the_duplicates()
+    df['Duration_ms']=pd.to_numeric(df['Duration_ms'])
+    df['Duration_ms']=(df['Duration_ms']/(60000.0))
+    return df
+
+#Task 6: Rename the modified column to Duration_min
+def rename_modified_column():
+    df=convert_milisecond_to_Minute()
+    df.rename(columns={"Duration_ms":"Duration_min"},inplace=True)
+    return df
+
+#Task 7: Remove irrelevant 'Track' name that starts with ?
+def Irrelevant_Track_name():
+    df=rename_modified_column()
+    df=df[~df['Track'].str.startswith('?')]
+    return df
+
+#Task 8: Calculate the Energy to Liveness ratio for each track and store it in columns 'EnergyLiveness'
+def Energy_to_liveness_Ratio():
+    df=Irrelevant_Track_name()
+    df['EnergyLiveness']=(pd.to_numeric(df['Energy'])/pd.to_numeric(df['Liveness']))
+    return df
+
+#Task 9: change the datatype of 'views' to float for further use
+def change_the_datatype():
+    df=Energy_to_liveness_Ratio()
+    df['Views']=pd.to_numeric(df['Views'])
+    return df
+
+#Task 10: compare the views and stream columns to infer
+# that the song track was more played on which platform, youtube or Spotify.
+# Create a column named most_playedon which will have two values.
+# Spotify and Youtube,If a song track is most played on youtube then
+# the most_played on column will have youtube as the value for that particular song
+def compare_the_views():
+    df=change_the_datatype()
+    df['most_playedon']=np.where(pd.to_numeric(df['Stream'])>pd.to_numeric(df["Views"]),"Spotify","Youtube")
+    return df
+
+#Task 11: export the cleaned dataset to CSV to "cleaned_dataset.csv"
+def export_the_cleaned_dataset():
+    df=compare_the_views()
+    df.to_csv("cleaned_dataset.csv",index=False)
+    
+
+#TASK 12
+#follow the instruction in the Task 13 description and complete the task as per it.
+
+#check if mysql table is created using "cleaned_dataset.csv"
+#Use this final dataset and upload it on the provided database for performing analysis in  MySQL
+#To run this task click on the terminal and click on the run projec
 ```
 ***
 
