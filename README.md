@@ -184,11 +184,13 @@ Spotify's most loved song tracks are to be declared soon. Help Spotify choose th
 ```python
 ##code
 # Solution: Task 1 : SELECT track,Views from cleaned_dataset order by Views desc limit 1;
-***  
+***
+```
 ```python
 ##code
 # Solution : Task 2 : select track,Stream from cleaned_dataset where most_playedon="spotify" order by Stream desc limit 1;
-***  
+*** 
+```
 ```python
 ##code
 # Solution : Task 3 : EnergyLiveness ratio is one of the popular ways to measure the quality of the song, which are the top 5 songs that have the highest energyliveness ratio.
