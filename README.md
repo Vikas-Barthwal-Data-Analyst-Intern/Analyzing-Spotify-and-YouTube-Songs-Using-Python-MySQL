@@ -9,7 +9,7 @@ The Project will consist of 2 modules:
 - Module 2: Analyzing data using SQL
 
 
-![info.jpeg](images/hicounselor youtube & spotify project screenshot.png)
+![info.png](images/hicounselor youtube & spotify project screenshot.png)
 
 ***
 
