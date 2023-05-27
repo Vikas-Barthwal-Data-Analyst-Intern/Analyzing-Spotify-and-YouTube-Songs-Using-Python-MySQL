@@ -184,30 +184,30 @@ Spotify's most loved song tracks are to be declared soon. Help Spotify choose th
 ```python
 ##code
 # Solution: Task 1 : 
-SELECT track,Views from cleaned_dataset order by Views desc limit 1;
+SELECT track,Views FROM cleaned_dataset ORDER BY Views DESC LIMIT 1;
 
 ##code
 # Solution : Task 2 : 
-select track,Stream from cleaned_dataset where most_playedon="spotify" order by Stream desc limit 1;
+SELECT track,Stream FROM cleaned_dataset WHERE most_playedon="spotify" ORDER BY Stream DESC LIMIT 1;
 
 ##code
 # Solution : Task 3 : 
-select track,EnergyLiveness from cleaned_dataset order by EnergyLiveness desc limit 5;
+SELECT track,EnergyLiveness FROM cleaned_dataset ORDER BY EnergyLiveness DESC LIMIT 5;
 
 ##code
 # Solution : Task 4 : 
-select count(track),most_playedon from cleaned_dataset where artist="Black Eyed Peas" group by most_playedon;
+SELECT COUNT(track),most_playedon FROM cleaned_dataset WHERE artist="Black Eyed Peas" GROUP BY most_playedon;
 
 ##code
 # Solution : Task 5 : 
-SELECT track,likes,energy,tempo from cleaned_dataset where artist="gorillaz" and most_playedon="spotify" order by Likes desc limit 1;
+SELECT track,likes,energy,tempo FROM cleaned_dataset WHERE artist="gorillaz" AND most_playedon="spotify" ORDER BY Likes DESC LIMIT 1;
 
 ##code
 # Solution : Task 6 : 
-select album_type,count(album_type) as total from cleaned_dataset group by album_type order by total desc;
+SELECT album_type,COUNT(album_type) AS total FROM cleaned_dataset GROUP BY album_type ORDER BY total DESC;
 
 ##code
 # Solution : Task 7 : 
-select track,Views + Stream as total from cleaned_dataset where most_playedon="youtube" group by track order by total desc limit 5;
+SELECT track,Views + Stream AS total FROM cleaned_dataset WHERE most_playedon="youtube" GROUP BY track ORDER BY total DESC LIMIT 5;
 ```
 ***
